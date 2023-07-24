@@ -9,7 +9,7 @@ import os
 from ctypes import CFUNCTYPE, c_char_p, c_int, cdll
 from contextlib import contextmanager
 
-TEMP_PATH = 'temp'
+TEMP_PATH = '/tmp'
 
 logger = logging.getLogger("snowboy")
 TOP_DIR = os.path.dirname(os.path.abspath(__file__))
