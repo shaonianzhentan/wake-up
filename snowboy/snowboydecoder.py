@@ -8,8 +8,8 @@ import wave
 import os
 from ctypes import CFUNCTYPE, c_char_p, c_int, cdll
 from contextlib import contextmanager
-from robot import constants
 
+TEMP_PATH = 'temp'
 
 logger = logging.getLogger("snowboy")
 TOP_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -193,7 +193,7 @@ class ActiveListener(object):
         Save the message stored in self.recordedData to a timestamped file.
         """
         filename = os.path.join(
-            constants.TEMP_PATH, "output" + str(int(time.time())) + ".wav"
+            TEMP_PATH, "output" + str(int(time.time())) + ".wav"
         )
         data = b"".join(self.recordedData)
 
@@ -414,7 +414,7 @@ class HotwordDetector(object):
         Save the message stored in self.recordedData to a timestamped file.
         """
         filename = os.path.join(
-            constants.TEMP_PATH, "output" + str(int(time.time())) + ".wav"
+            TEMP_PATH, "output" + str(int(time.time())) + ".wav"
         )
         data = b"".join(self.recordedData)
 
