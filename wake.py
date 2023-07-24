@@ -17,7 +17,7 @@ class WakeUp():
     def interrupt_callback(self):
         return self.interrupted
 
-    def detected_callback(self, is_snowboy):
+    def detected_callback(self):
         print('叮')
 
     def audio_recorder_callback(self, fp, callback=None):
