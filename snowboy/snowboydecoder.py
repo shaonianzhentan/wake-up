@@ -8,6 +8,7 @@ import wave
 import os
 from ctypes import CFUNCTYPE, c_char_p, c_int, cdll
 from contextlib import contextmanager
+from robot import utils
 
 TEMP_PATH = '/tmp'
 
@@ -311,8 +312,7 @@ class HotwordDetector(object):
         self._running = True
 
         def audio_callback(in_data, frame_count, time_info, status):
-            #if utils.isRecordable():
-            if False:
+            if utils.isRecordable():
                 self.ring_buffer.extend(in_data)
                 play_data = chr(0) * len(in_data)
             else:
@@ -381,7 +381,7 @@ class HotwordDetector(object):
                     if (
                         audio_recorder_callback
                         and status == 1
-                        # and utils.is_proper_time()
+                        and utils.is_proper_time()
                     ):
                         state = "ACTIVE"
                     continue
