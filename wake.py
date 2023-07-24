@@ -1,13 +1,12 @@
-import signal
+import signal, requests
 from snowboy import snowboydecoder
 
 class WakeUp():
   
-    def __init__(self):
+    def __init__(self, model):
         self.interrupted = False
         signal.signal(signal.SIGINT, self.signal_handler) # 捕获ctrl+c
 
-        model = '萝卜头.pmdl'
         self.detector = snowboydecoder.HotwordDetector(model, sensitivity=0.5) # 设置语音模型与敏感度
         print('Listening... Press Ctrl+Z to exit')
         
@@ -19,6 +18,7 @@ class WakeUp():
 
     def detected_callback(self):
         print('叮')
+        requests.get('http://localhost:8125/wakeup')
 
     def audio_recorder_callback(self, fp, callback=None):
         print(fp)
@@ -34,4 +34,4 @@ class WakeUp():
               recording_timeout=5 * 4,
               sleep_time=0.03)
 
-WakeUp().run()
+WakeUp('萝卜头.pmdl').run()
